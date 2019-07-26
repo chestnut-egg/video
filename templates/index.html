@@ -7,12 +7,19 @@
 <body>
 
 <p>dirs</p>
-
 <p>
 {% for dir_name in info['dirs'] %}
     {{ dir_name }}
 {% endfor %}
 </p>
+
+<p>videos</p>
+<p>
+{% for video_name in info['video_name'] %}
+    {{ video_name }}
+{% endfor %}
+</p>
+
 
 </body>
 </html>
