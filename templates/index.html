@@ -7,13 +7,14 @@
 <body>
 
 <p>{{ info['root'] }}</p>
-
 <p>dirs</p>
-<p>
-{% for dir_name in info['dirs'] %}
-    {{ dir_name }}
+
+{% for name in info['dirs_name'] %}
+<a href="{{ url_for('index',root=info['root']) }}">
+{{ name }}  {{ info['root'] }}{{ name }}/ <br> <br>
+</a>
 {% endfor %}
-</p>
+
 
 <p>videos</p>
 <p>

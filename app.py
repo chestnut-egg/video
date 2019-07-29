@@ -17,24 +17,42 @@ app = Flask(__name__)
 def hello_world():
     return redirect(url_for(index))
 
-@app.route('/index')
+@app.route('/index',methods=['GET', 'POST'])
 def index():
+    if request.method == 'GET':
+        root = request.args.get('root')
+        print(root)
+        if root == None:
+            info = nowos(cp.get("file", "download_address"))
+            return render_template('index.html', info=info)
+        else:
+            info = nowos(cp.get("file", "download_address"))
+            return render_template('index.html', info=info)
+
     info = nowos(cp.get("file","download_address"))
     return render_template('index.html',info = info)
+
+
+
+# @app.route("/hello/<username>")
+# def hello_user(username):
+#   return "Hello {}!".format(username)
 
 def nowos(file_dir):
 
     logger.info(os.listdir(file_dir))
 
     files = []
-    dirs = []
+    dirs_name = []
+    dirs_url = []
     root = file_dir
 
     for name in os.listdir(file_dir):
         if os.path.isfile(os.path.join(root, name)):
             files.append(name)
         else:
-            dirs.append(name)
+            dirs_name.append(name)
+            dirs_url.append(os.path.join(root, name))
 
     logger.info(files)
 
@@ -54,7 +72,8 @@ def nowos(file_dir):
     info = {}
     info['root'] = root
     info['files'] = files
-    info['dirs'] = dirs
+    info['dirs_name'] = dirs_name
+    info['dirs_url'] = dirs_url
     info['video_name'] = video_name
     info['video_url'] = video_url
 
