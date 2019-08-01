@@ -6,12 +6,14 @@
 </head>
 <body>
 
+<a href="{{ url_for('index') }}"> index </a>
+
 <p>{{ info['root'] }}</p>
 <p>dirs</p>
 
-{% for name in info['dirs_name'] %}
-<a href="{{ url_for('index',root=info['root']) }}">
-{{ name }}  {{ info['root'] }}{{ name }}/ <br> <br>
+{% for name,url in info['dirs_info'].items() %}
+<a href="{{ url_for('index',root=url) }}">
+{{ name }}  {{ url }}/ <br> <br>
 </a>
 {% endfor %}
 

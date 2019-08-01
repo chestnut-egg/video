@@ -26,7 +26,7 @@ def index():
             info = nowos(cp.get("file", "download_address"))
             return render_template('index.html', info=info)
         else:
-            info = nowos(cp.get("file", "download_address"))
+            info = nowos(root)
             return render_template('index.html', info=info)
 
     info = nowos(cp.get("file","download_address"))
@@ -69,11 +69,18 @@ def nowos(file_dir):
 
     logger.info(video_name)
 
+    dirs_info ={}
+
+    for i in range(0,len(dirs_name)):
+        dirs_info[dirs_name[i]] = dirs_url[i]
+
+
     info = {}
     info['root'] = root
     info['files'] = files
     info['dirs_name'] = dirs_name
     info['dirs_url'] = dirs_url
+    info['dirs_info'] = dirs_info
     info['video_name'] = video_name
     info['video_url'] = video_url
 
