@@ -21,7 +21,10 @@ def hello_world():
 def index():
     if request.method == 'GET':
         root = request.args.get('root')
-        print(root)
+        if root == None:
+            logger.info('root: null')
+        else:
+            logger.info('root:' + root)
         if root == None:
             info = nowos(cp.get("file", "download_address"))
             return render_template('index.html', info=info)
@@ -40,7 +43,7 @@ def index():
 
 def nowos(file_dir):
 
-    logger.info(os.listdir(file_dir))
+    logger.info('listdir'+str(os.listdir(file_dir)))
 
     files = []
     dirs_name = []
@@ -54,7 +57,7 @@ def nowos(file_dir):
             dirs_name.append(name)
             dirs_url.append(os.path.join(root, name))
 
-    logger.info(files)
+    logger.info('files:' + str(files))
 
     str1 = str(cp.get("file","video"))
     allow = str1.split(",")
@@ -67,7 +70,7 @@ def nowos(file_dir):
             video_name.append(file_name)
             video_url.append(os.path.join(root,file_name))
 
-    logger.info(video_name)
+    logger.info('video_name:'+ str(video_name))
 
     dirs_info ={}
 
