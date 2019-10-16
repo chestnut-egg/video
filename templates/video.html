@@ -1,25 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="./fz-video.css">
-    <link rel="stylesheet" href="./font/iconfont.css">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 
+<video width="320" height="240" controls>
+  <source src="/static/movie.mp4" type="video/mp4">
+<!--  <source src="movie.ogg" type="video/ogg">-->
+</video>
+
+
 </body>
-
-<script src="./fz-video.js"></script>
-
-<script>
-    var FZ_VIDEO = new createVideo(
-        "testBox",  //容器的id
-     {
-          url: 'http://171.15.197.89/xdispatch/o8t28neoq.bkt.clouddn.com/test.mp4',  //视频地址
-         autoplay:true          //是否自动播放
-      }
-    );
-</script>
-
 </html>
