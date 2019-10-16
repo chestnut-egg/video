@@ -17,6 +17,11 @@ app = Flask(__name__)
 def hello_world():
     return redirect(url_for(index))
 
+@app.route('/video')
+def video():
+    info = {}
+    return render_template('video.html',info = info)
+
 @app.route('/index',methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
