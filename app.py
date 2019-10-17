@@ -22,6 +22,8 @@ def hello_world():
 @app.route('/video')
 def video():
     info = {}
+    the_video_name = request.args.get('video_name')
+    logger.info('in:' + str(the_video_name))
     return render_template('video.html',info = info)
 
 @app.route('/index',methods=['GET', 'POST'])
@@ -101,13 +103,21 @@ def move(srcfile, dstfile):
     if not os.path.isfile(srcfile):
         print("%s not exist!" % (srcfile))
     else:
-        fpath, fname = os.path.split(dstfile)  # 分离文件名和路径
+        fpath, fname = os.path.split(dstfile)
         if not os.path.exists(fpath):
-            os.makedirs(fpath)  # 创建路径
-        shutil.move(srcfile, dstfile)  # 移动文件
+            os.makedirs(fpath)
+        shutil.move(srcfile, dstfile)
         print("move %s -> %s" % (srcfile, dstfile))
 
-
+def copy(srcfile,dstfile):
+    if not os.path.isfile(srcfile):
+        print("%s not exist!" % (srcfile))
+    else:
+        fpath,fname=os.path.split(dstfile)
+        if not os.path.exists(fpath):
+            os.makedirs(fpath)
+        shutil.copyfile(srcfile,dstfile)
+        print("move %s -> %s" % (srcfile, dstfile))
 
 
 if __name__ == '__main__':
