@@ -21,7 +21,7 @@
 <p>videos</p>
 
 {% for video_name in info['video_name'] %}
-    <a href="{{ url_for('video',video_name=video_name) }}">
+    <a href="{{ url_for('video',video_name=video_name,root=info['root']) }}">
         {{ video_name }}
     </a>
 &nbsp;

@@ -23,7 +23,11 @@ def hello_world():
 def video():
     info = {}
     the_video_name = request.args.get('video_name')
-    logger.info('in:' + str(the_video_name))
+    the_root = request.args.get('root')
+    url = the_root + the_video_name
+    logger.info('in:' + str(url))
+    copy(url,"/home/ppg/PycharmProjects/video/static/"+the_video_name)
+    info["video_url"] = "/static/"+the_video_name
     return render_template('video.html',info = info)
 
 @app.route('/index',methods=['GET', 'POST'])
@@ -101,23 +105,23 @@ def nowos(file_dir):
 
 def move(srcfile, dstfile):
     if not os.path.isfile(srcfile):
-        print("%s not exist!" % (srcfile))
+        logger.info("%s not exist!" % (srcfile))
     else:
         fpath, fname = os.path.split(dstfile)
         if not os.path.exists(fpath):
             os.makedirs(fpath)
         shutil.move(srcfile, dstfile)
-        print("move %s -> %s" % (srcfile, dstfile))
+        logger.info("move %s -> %s" % (srcfile, dstfile))
 
 def copy(srcfile,dstfile):
     if not os.path.isfile(srcfile):
-        print("%s not exist!" % (srcfile))
+        logger.info("%s not exist!" % (srcfile))
     else:
         fpath,fname=os.path.split(dstfile)
         if not os.path.exists(fpath):
             os.makedirs(fpath)
         shutil.copyfile(srcfile,dstfile)
-        print("move %s -> %s" % (srcfile, dstfile))
+        logger.info("copy %s -> %s" % (srcfile, dstfile))
 
 
 if __name__ == '__main__':
